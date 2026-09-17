@@ -27,8 +27,10 @@ import argparse, bisect, csv, datetime as dt, os, statistics as st, sys
 
 CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "study1-wayback-downloads.csv")
 # The first band is the POSTING YEAR, not a full first year: it holds papers whose
-# capture fell in the same calendar year as the posting stamp, and 58% of all captures
-# in the sample were taken in a single crawl between 25 April and 7 May 2025.
+# capture fell in the same calendar year as the posting stamp. Half the sample's
+# captures (688 of 1,360, 50.6%) were taken in one crawl between 25 April and
+# 7 May 2025, and 81.5% fall in 2025, so age here is close to a restatement of
+# posting year and cannot be separated from cohort.
 # Age is measured in WHOLE YEARS. 1,358 of the 1,360 posting dates in the sample
 # carry the stamp 1 January, so the data has year resolution only and cannot
 # support bands shorter than a year. An earlier version of this tool offered an
