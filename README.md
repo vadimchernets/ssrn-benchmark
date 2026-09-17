@@ -26,14 +26,18 @@ No installation, no dependencies, no account. Python 3 and two files.
 
 | Paper age | n | 25% | median | 75% | 90% | 95% |
 |---|---|---|---|---|---|---|
-| first year | 203 | 5 | 12 | 21 | 51 | 111 |
+| posting year | 203 | 5 | 12 | 21 | 51 | 111 |
 | 1–2 years | 253 | 15 | 25 | 44 | 108 | 165 |
 | 2–5 years | 375 | 28 | 52 | 101 | 208 | 332 |
 | 5–10 years | 188 | 72 | 130 | 376 | 914 | 1,358 |
 | over 10 years | 341 | 96 | 172 | 336 | 851 | 1,441 |
 
-**The median for a paper in its first year is 12** — far lower than most authors
-assume. Counts keep accruing for decades rather than spiking and stopping.
+**The median for a paper in its posting year is 12** — far lower than most authors
+assume. Growth is concentrated in the first three or four years: within a field,
+median downloads roughly double per year over that stretch, and after five years
+the differences between age bands are not statistically significant (Mann-Whitney
+p = 0.23 to 0.82 for the three fields with enough old papers). This is a
+cross-section, so it shows levels by age, not the trajectory of any one paper.
 
 Read the column downwards with care. The mix of fields in this sample changes
 with age (Engineering is 24% of the young papers and 3% of the old ones), so
@@ -41,8 +45,12 @@ part of the rise down the column is composition rather than age.
 
 ## Field matters more than most authors expect
 
-Among papers of the same age, median downloads differ by a factor of **4.7**
-across subject fields:
+Among papers of the same age, median downloads differ by roughly a factor of
+**3** across subject fields. Holding age constant in a regression on log downloads,
+the multiplier against Economics runs from 0.98 for Business to 0.30 for Materials
+Science. The raw spread within a single age band reaches 4.7, but that is the ratio
+of the highest to the lowest of eight medians, some resting on 23 papers; its
+bootstrap 95% interval is 3.2 to 7.4.
 
 | Field | n | median downloads, age 1–3 years |
 |---|---|---|
@@ -85,7 +93,6 @@ are gone. The window closed.
   4 months" band and a claim that counts do not climb steadily over the first
   year; both were artefacts of that stamp (72 of the 76 captures in that band fell
   in a single April) and have been withdrawn.
-  first year are approximate.
 
 ## Files
 

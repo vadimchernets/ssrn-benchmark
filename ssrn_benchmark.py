@@ -9,9 +9,9 @@ papers whose counters were captured from the Internet Archive before the
 sunset. That source is now closed: SSRN serves HTTP 403 to automated
 clients, so this snapshot cannot be re-collected.
 
-Field matters. Among papers of the same age, median downloads differ by a
-factor of about 4.7 across subject fields, so a pooled percentile can be
-misleading. Pass --field whenever you know it.
+Field matters. Holding age constant, median downloads differ by roughly a
+factor of 3 across subject fields, so a pooled percentile can be misleading.
+Pass --field whenever you know it.
 
 Usage
 -----
@@ -26,14 +26,17 @@ No dependencies beyond the Python standard library.
 import argparse, bisect, csv, datetime as dt, os, statistics as st, sys
 
 CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "study1-wayback-downloads.csv")
+# The first band is the POSTING YEAR, not a full first year: it holds papers whose
+# capture fell in the same calendar year as the posting stamp, and 58% of all captures
+# in the sample were taken in a single crawl between 25 April and 7 May 2025.
 # Age is measured in WHOLE YEARS. 1,358 of the 1,360 posting dates in the sample
 # carry the stamp 1 January, so the data has year resolution only and cannot
 # support bands shorter than a year. An earlier version of this tool offered an
 # "under 4 months" band; that band was an artefact of the stamp (72 of its 76
 # captures fell in a single April) and has been withdrawn.
-BANDS = [(0, 1, "first year"), (1, 2, "1-2 years"), (2, 5, "2-5 years"),
+BANDS = [(0, 1, "posting year"), (1, 2, "1-2 years"), (2, 5, "2-5 years"),
          (5, 10, "5-10 years"), (10, 10**6, "over 10 years")]
-MIN_N = 8
+MIN_N = 20
 
 def load():
     out = []
@@ -102,7 +105,7 @@ def report(downloads, months, papers, field, recs):
     print(f"  Paper age   : {months:g} months  ->  reference class \"{label}\"")
     print(f"  Compared to : {scope} (n={q['n']})\n")
     print(f"  Percentile  : ~{pct:.0%}  (higher than {pct:.0%} of these papers)\n")
-    print(f"  That band   : 25%={q['p25']}   median={q['median']:.0f}   75%={q['p75']}   90%={q['p90']}   95%={q['p95']}")
+    print(f"  That band   : 25%={q['p25']}   median={q['median']:.1f}   75%={q['p75']}   90%={q['p90']}   95%={q['p95']}")
     print(f"  Verdict     : {verdict_for(pct)} for a paper of this age and field\n")
 
     if field and peers is not pooled:
@@ -114,7 +117,7 @@ def report(downloads, months, papers, field, recs):
     elif not field:
         print("  No --field given, so this is a pooled percentile. Among papers of the same")
         print("  age, median downloads range from about 23 (Materials Science) to about 109")
-        print("  (Business), a factor of 4.7, and the mix of fields shifts with age. Pass")
+        print("  (Business), and the mix of fields shifts with age too. Pass")
         print("  --field for a figure you can act on; --fields lists the 25 available.\n")
 
     print("  Read this carefully:")
@@ -158,7 +161,10 @@ def field_table(recs):
         print(f"  {f[:45]:<45}{len(v):>6}{st.median(v):>9.0f}")
     meds = [st.median(v) for v in rows.values()]
     print(f"\n  Spread at equal age: {min(meds):.0f} to {max(meds):.0f}, a factor of {max(meds)/min(meds):.1f}.")
-    print("  This is why a pooled percentile can mislead.\n")
+    print("  That is the ratio of the highest to the lowest of these medians, and the")
+    print("  smallest rest on about 20 papers each. Holding age constant across the whole")
+    print("  sample the field effect is nearer a factor of 3. Either way, a pooled")
+    print("  percentile can mislead.\n")
 
 def list_fields(recs):
     known = sorted({f for _, _, f in recs if f})
