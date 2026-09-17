@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+title: "ssrn-benchmark: a reference class for SSRN download counts"
+message: "If you use this tool or the dataset, please cite the dataset."
+type: software
+authors:
+  - family-names: Chernets
+    given-names: Vadym
+    orcid: "https://orcid.org/0009-0007-4845-3163"
+repository-code: "https://github.com/vadimchernets/ssrn-benchmark"
+license: MIT
+references:
+  - type: data
+    title: "An archival cross-section of SSRN download counts (n = 1,360)"
+    authors:
+      - family-names: Chernets
+        given-names: Vadym
+    doi: "10.5281/zenodo.22285871"
+    year: 2026
+  - type: article
+    title: "What Does 7 Downloads Mean? Metric Blindness and the Cold Start of Scholarly Attention After the SSRN Rankings Sunset"
+    authors:
+      - family-names: Chernets
+        given-names: Vadym
+    doi: "10.2139/ssrn.7296358"
+    year: 2026
