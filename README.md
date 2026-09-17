@@ -8,15 +8,16 @@ whether that is bad, ordinary, or good.
 This tool answers that question.
 
 ```
-$ python3 ssrn_benchmark.py --downloads 7 --months 2
+$ python3 ssrn_benchmark.py --downloads 7 --months 2 --field "Social Sciences"
 
   Your figure : 7 downloads
-  Paper age   : 2 months  ->  reference class "under 4 months" (n=76)
+  Paper age   : 2 months  ->  reference class "first year"
+  Compared to : Social Sciences (n=24)
 
-  Percentile  : ~26%  (higher than 26% of SSRN papers of the same age)
+  Percentile  : ~25%  (higher than 25% of these papers)
 
-  That band   : 25%=6   median=13   75%=18   90%=47   95%=55
-  Verdict     : below typical for a paper of this age
+  That band   : 25%=7   median=14   75%=30   90%=82   95%=86
+  Verdict     : below typical for a paper of this age and field
 ```
 
 No installation, no dependencies, no account. Python 3 and two files.
@@ -25,16 +26,37 @@ No installation, no dependencies, no account. Python 3 and two files.
 
 | Paper age | n | 25% | median | 75% | 90% | 95% |
 |---|---|---|---|---|---|---|
-| under 4 months | 76 | 6 | 13 | 18 | 47 | 55 |
-| 4–12 months | 127 | 4 | 11 | 27 | 82 | 183 |
-| 1–2 years | 252 | 15 | 25 | 44 | 108 | 165 |
-| 2–5 years | 376 | 28 | 52 | 101 | 208 | 332 |
-| over 5 years | 529 | 85 | 158 | 345 | 880 | 1,441 |
+| first year | 203 | 5 | 12 | 21 | 51 | 111 |
+| 1–2 years | 253 | 15 | 25 | 44 | 108 | 165 |
+| 2–5 years | 375 | 28 | 52 | 101 | 208 | 332 |
+| 5–10 years | 188 | 72 | 130 | 376 | 914 | 1,358 |
+| over 10 years | 341 | 96 | 172 | 336 | 851 | 1,441 |
 
-Two things worth noticing. **The median for a new paper is 13** — far lower
-than most authors assume. And counts **do not climb steadily**: the 4–12 month
-band sits no higher than the first four months. Real growth starts after the
-first year, which is why a few months is too early to judge anything.
+**The median for a paper in its first year is 12** — far lower than most authors
+assume. Counts keep accruing for decades rather than spiking and stopping.
+
+Read the column downwards with care. The mix of fields in this sample changes
+with age (Engineering is 24% of the young papers and 3% of the old ones), so
+part of the rise down the column is composition rather than age.
+
+## Field matters more than most authors expect
+
+Among papers of the same age, median downloads differ by a factor of **4.7**
+across subject fields:
+
+| Field | n | median downloads, age 1–3 years |
+|---|---|---|
+| Business; Management and Accounting | 35 | 109 |
+| Social Sciences | 61 | 71 |
+| Economics; Econometrics and Finance | 53 | 65 |
+| Computer Science | 34 | 46 |
+| Agricultural and Biological Sciences | 23 | 29 |
+| Environmental Science | 42 | 28 |
+| Engineering | 132 | 25 |
+| Materials Science | 39 | 23 |
+
+A percentile computed without the field can therefore mislead by a wide margin.
+Pass `--field` whenever you know it; `--fields` lists all 25.
 
 ## Where the numbers come from
 
@@ -57,7 +79,12 @@ are gone. The window closed.
   share of any count is not a human reader.
 - **Downloads are not citations.** They are only weakly related, and this tool
   says nothing about citation prospects.
-- **Age is measured from a year-granularity posting date**, so ages inside the
+- **Posting dates carry only a year.** 1,358 of the 1,360 records are stamped
+  1 January, so there is no month in the data. Age is resolved to whole years and
+  no shorter band is offered. An earlier version of this tool reported an "under
+  4 months" band and a claim that counts do not climb steadily over the first
+  year; both were artefacts of that stamp (72 of the 76 captures in that band fell
+  in a single April) and have been withdrawn.
   first year are approximate.
 
 ## Files
