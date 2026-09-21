@@ -8,6 +8,17 @@ authors:
     orcid: "https://orcid.org/0009-0007-4845-3163"
 repository-code: "https://github.com/vadimchernets/ssrn-benchmark"
 license: MIT
+preferred-citation:
+  type: data
+  title: "An archival cross-section of SSRN download counts (n = 1,360): data and code"
+  authors:
+    - family-names: Chernets
+      given-names: Vadym
+      orcid: "https://orcid.org/0009-0007-4845-3163"
+  doi: "10.5281/zenodo.22285871"
+  year: 2026
+  publisher:
+    name: Zenodo
 references:
   - type: data
     title: "An archival cross-section of SSRN download counts (n = 1,360)"

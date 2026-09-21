@@ -1,4 +1,4 @@
-# ssrn-benchmark — is your SSRN download count normal?
+# ssrn-benchmark: is your SSRN download count normal?
 
 On 15 July 2026 SSRN retired its public Rankings. Authors kept the download
 counter and lost everything to read it against. If your paper shows 7
@@ -32,7 +32,7 @@ No installation, no dependencies, no account. Python 3 and two files.
 | 5–10 years | 188 | 72 | 130 | 376 | 914 | 1,358 |
 | over 10 years | 341 | 96 | 172 | 336 | 851 | 1,441 |
 
-**The median for a paper in its posting year is 12** — far lower than most authors
+**The median for a paper in its posting year is 12**, far lower than most authors
 assume. Growth is concentrated in the first three or four years: within a field,
 median downloads roughly double per year over that stretch, and after five years
 the differences between age bands are not statistically significant (Mann-Whitney
