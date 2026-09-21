@@ -115,4 +115,4 @@ https://doi.org/10.2139/ssrn.7296358
 
 ## Licence
 
-Data CC BY 4.0 · code MIT.
+Code: MIT (`LICENSE`). Data (`study1-wayback-downloads.csv`): CC BY 4.0 (`LICENSE-DATA`).
